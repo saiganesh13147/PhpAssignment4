@@ -1,23 +1,39 @@
 <html>
-<head>
-</head>
- <body>
- <div id="display">
- </div>
- <p><input id="message" type="text" name="message"></p>
- <p><input id="username" type="text" name="username"></p>
- <p>
- <button type="button" onclick="postdata()">Submit Message</button>
- </p>
- </body>
-<script>  
-function getmessage() {
+  <head> </head>
+  <body>
+    <div id="display"></div>
+    <p><input id="message" type="text" name="message" /></p>
+    <p><input id="username" type="text" name="username" /></p>
+    <p>
+      <button type="button" onclick="postdata()">Submit Message</button>
+    </p>
+  </body>
+  <script>
+    function getmessage() {
+      var xmlhttp = new XMLHttpRequest()
+      xmlhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+          document.getElementById('display').innerHTML = this.responseText
+        }
+      }
+      xmlhttp.open('GET', 'messages.php', true)
+      xmlhttp.send()
+    }
 
-}
+    function postdata() {
+      var xhttp = new XMLHttpRequest()
+      var formdata = new FormData()
+      formdata.append('message', document.getElementById('message'))
+      formdata.append('username', document.getElementById('username'))
 
-function postdata() {
-
-}
-getmessage();
- </script>
- </html>
+      xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+          console.log(this.responseText)
+        }
+      }
+      xhttp.open('POST', 'input.php', true)
+      xhttp.send(formdata)
+    }
+    setInterval(getmessage, 1000)
+  </script>
+</html>
