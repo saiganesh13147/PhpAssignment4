@@ -1,6 +1,6 @@
 <?php
-
-if($_SERVER['METHOD'] === 'POST'){
+require('mysqli_oop_connect.php');
+if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
     if(empty($_POST['username'])){
         
