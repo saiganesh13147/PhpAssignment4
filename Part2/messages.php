@@ -7,8 +7,8 @@ $r = $mysqli->query($q);
 
 while($row = $r->fetch_assoc() ) {
 
-    echo "<div><p>{$row["message"]}</p><br></div>";
-    echo "<div><p>{$row["username"]}</p><br></div>";
+    echo "<div><p>Message: {$row["message"]} Username: {$row["username"]}</p><br></div>";
+    
 
 }
 

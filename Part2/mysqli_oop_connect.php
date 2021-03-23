@@ -8,7 +8,7 @@
 define('DB_USER', 'root');
 define('DB_PASSWORD', 'amma@123');
 define('DB_HOST', 'localhost:3306');
-define('DB_NAME', 'Message_Board');
+define('DB_NAME', 'Message_Board_SaiGanesh');
 
 // Make the connection:
 $mysqli = new MySQLi(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);

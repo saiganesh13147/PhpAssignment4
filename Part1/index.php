@@ -1,3 +1,137 @@
+<?php
+session_start();
+
+include('vending.php');
+
+$change =  0;
+
+
+
+if(isset($_POST['money']))
+{
+ if ($_POST['money'] == 'dollar'){
+
+    if(!isset($_SESSION['load'])){
+
+        $_SESSION['load'] = 1;
+    }else{
+
+        $_SESSION['load'] =  $_SESSION['load'] + 1;
+    }
+    
+ }
+
+ if ($_POST['money'] == 'twenfivecents'){
+
+    if(!isset($_SESSION['load'])){
+
+        $_SESSION['load'] = 0.25;
+    }else{
+
+        $_SESSION['load'] =  $_SESSION['load'] + 0.25;
+    }
+
+ }
+
+ if ($_POST['money'] == 'tencents'){
+
+    if(!isset($_SESSION['load'])){
+
+        $_SESSION['load'] = 0.10;
+    }else{
+
+        $_SESSION['load'] =  $_SESSION['load'] + 0.10;
+    }
+
+ }
+ if ($_POST['money'] == 'fivecents'){
+
+    if(!isset($_SESSION['load'])){
+
+        $_SESSION['load'] = 0.05;
+    }else{
+
+        $_SESSION['load'] =  $_SESSION['load'] + 0.05;
+    }
+
+    echo  $_SESSION['load'];
+ }
+ 
+
+}
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+
+    if(!isset($_POST['products'])){
+
+
+    }
+    else{
+
+       $load = $_SESSION['load'];
+
+       $product = $_POST['product'];
+
+        if($product = ""){
+
+            echo "Select an Item";
+
+        }
+        if($product == "chocolate"){
+
+
+            if($load < 1.25){
+
+                echo " Please load more cash for choclate";
+
+            }
+            else{
+
+                $transaction = new vevendingMachine(1.25, $product, $load);
+                $item->purchase();
+            }
+
+
+        }
+        if($product == "chips"){
+
+
+            if($load < 1.75){
+
+                echo " Please load more cash for chips";
+
+            }
+            else{
+
+                $item= new vevendingMachine(1.75, $product, $load);
+                $item->purchase();
+            }
+
+
+        }
+        if($product == "pop"){
+
+
+            if($load < 1.50){
+
+                echo " Please load more cash for pop";
+
+            }
+            else{
+
+                $item = new vevendingMachine(1.50, $product, $load);
+                $item->purchase();
+            }
+
+
+        }
+
+          
+    }
+}
+
+
+?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -21,27 +155,30 @@
     <div class='container'>
     <br>
     <br>
-    <form method='post' action='action.php'>
+    <form method='post' action=''>
     <div class="form-group"> 
-    <input type='button' value='chocalate'>
-    <!-- </div>
-    <div class='form-group'> -->
-    <input type='button' value='pop'> 
-    <!-- </div>
-    <div class='form-group'> -->
-    <input type='button' value='chips'> 
-    <!-- </div> -->
-    <br>
-    <br>
-    <div class='form-group'>
-    <button name='dollar' id='dollar'>1 dollar</button>
-    <button name='fivecents' id='fivecents'>25 cents</button>
-    <button name='tencents' id='tencents'>10 cents</button>
-    <button name='fivecents' id='fivecents'>5 cents</button><br><br>
+    <select name="product" >
+            
+             <option value="pop">pop</option>
+              <option value="chips">chips</option> 
+              <option value="chocolate">chocolate</option>
+              
+        </select>
+    <br><br>
     </div>
     <br>
     <br>
-    <input type='submit' value='submit'>
+    <div class='form-group'>
+    <input type='submit' name='money' id='dollar' value='dollar'>
+    <input type='submit' name='money' id='twenfivecents' value='25cents'>
+    <input type='submit' name='money' id='tencents' value='10cents'>
+    <input type='submit' name='money' id='fivecents' value='5cents'>
+    <br>
+    <br>
+    </div>
+    <br>
+    <br>
+    <button type='submit' value='submit'>Submit</button>
     </form>
     
 </div>
